@@ -3,21 +3,31 @@ using System.Collections.Generic;
 
 namespace CollectIt
 {
+    public class DepartmentCollection : SortedDictionary<string, SortedSet<Employee>>
+    {
+        public DepartmentCollection Add(string departmentName, Employee employee)
+        {
+            if (!ContainsKey(departmentName))
+            {
+                Add(departmentName, new SortedSet<Employee>(new EmployeeComparer()));
+            }
+            this[departmentName].Add(employee);
+            return this;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            var departments = new SortedDictionary<string, SortedSet<Employee>>();
+            var departments = new DepartmentCollection();
 
-            departments.Add("Sales", new SortedSet<Employee>(new EmployeeComparer()));
-            departments["Sales"].Add(new Employee { Name = "Joy" });
-            departments["Sales"].Add(new Employee { Name = "Dani" });
-            departments["Sales"].Add(new Employee { Name = "Dani" });
+            departments.Add("Sales", new Employee { Name = "Dani" })
+                       .Add("Sales", new Employee { Name = "Dani" })
+                       .Add("Sales", new Employee { Name = "Joy" });
 
-            departments.Add("Engineering", new SortedSet<Employee>(new EmployeeComparer()));
-            departments["Engineering"].Add(new Employee { Name = "Scott" });
-            departments["Engineering"].Add(new Employee { Name = "Alex" });
-            departments["Engineering"].Add(new Employee { Name = "Dani" });
+            departments.Add("Engineering", new Employee { Name = "Dani" })
+                       .Add("Engineering", new Employee { Name = "Scott"})
+                       .Add("Engineering", new Employee { Name = "Alex" });
 
 
 
