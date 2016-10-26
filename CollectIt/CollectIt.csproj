@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="DepartmentCollection.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeComparer.cs" />
     <Compile Include="Program.cs" />
